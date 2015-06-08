@@ -1,13 +1,12 @@
-<%= form_for([@article, @article.comments.build]) do |f| %>
-  <p>
-    <%= f.label :commenter %><br>
-    <%= f.text_field :commenter %>
-  </p>
-  <p>
-    <%= f.label :body %><br>
-    <%= f.text_area :body %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
+<%= simple_form_for @comment, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :commenter %>
+  <%= error_span(@comment[:commenter]) %>
+  <%= f.input :body %>
+  <%= error_span(@comment[:body]) %>
+  <%= f.input :article_id %>
+  <%= error_span(@comment[:article_id]) %>
+
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                comments_path, :class => 'btn btn-default' %>
 <% end %>
